@@ -1,6 +1,25 @@
+import { useContext } from "react"
+import { GlobalContext } from "../../context/GlobalContext"
+import RecipeItem from "../../components/recipe-item"
+
+
 export default function Favorites() {
 
-  return (
-    <div className='bg-gray-500'>Favorites</div>
-  )
+    const {favoritesList} = useContext(GlobalContext)
+
+    return (
+      <div className='py8 container mx-auto flex flex-wrap justify-center gap-10'>
+        {
+          favoritesList && favoritesList.length > 0
+          ?
+            favoritesList.map((item) => <RecipeItem item={item}/>)
+          :
+            <div>
+              <p className="lg:text-4xl text-xl text-center text-black font-bold">Your Favorites list is empty</p>
+            </div>
+        }
+      </div>
+
+    )    
+
 }
